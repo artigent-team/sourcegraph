@@ -1,15 +1,24 @@
-import { storiesOf } from '@storybook/react'
+import { Meta, Story, DecoratorFn } from '@storybook/react'
 
 import { WebStory } from '../../../components/WebStory'
 
 import { DotcomGettingStartedPage } from './DotcomGettingStartedPage'
 
-const { add } = storiesOf('web/batches/DotcomGettingStartedPage', module)
-    .addDecorator(story => <div className="p-3 container">{story()}</div>)
-    .addParameters({
-        chromatic: {
-            disableSnapshot: false,
-        },
-    })
+const decorator: DecoratorFn = story => <div className="p-3 container">{story()}</div>
 
-add('Overview', () => <WebStory>{() => <DotcomGettingStartedPage />}</WebStory>)
+const config: Meta = {
+    title: 'web/batches/DotcomGettingStartedPage',
+    decorators: [decorator],
+}
+
+export default config
+
+export const Overview: Story = () => <WebStory>{() => <DotcomGettingStartedPage />}</WebStory>
+
+Overview.parameters = {
+    chromatic: {
+        disableSnapshot: false,
+    },
+}
+
+Overview.storyName = 'Overview'
